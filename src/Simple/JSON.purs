@@ -369,8 +369,8 @@ instance consWriteForeignVariant ::
       variant
     where
     namep = SProxy :: SProxy name
-    name = reflectSymbol namep
-    writeVariant value = unsafeToForeign $ Object.insert name (writeImpl value) Object.empty
+    writeVariant value = unsafeToForeign
+      $ Object.insert (reflectSymbol namep) (writeImpl value) Object.empty
 
 instance readForeignNEArray :: ReadForeign a => ReadForeign (NonEmptyArray a) where
   readImpl f = do
